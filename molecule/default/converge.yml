@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include lucas_stofaleti.osticket"
+      include_role:
+        name: "lucas_stofaleti.osticket"
