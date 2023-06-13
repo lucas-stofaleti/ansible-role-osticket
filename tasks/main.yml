@@ -1,17 +1,38 @@
 ---
-- name: Install Unzip
-  apt: unzip
-  update_cache: yes
-  state: present
+- name: Install unzip
+  package:
+    name: unzip
+    state: present
+    update_cache: yes
 
-- name: Create osTicket directory if it does not exist
-  ansible.builtin.file:
+- name: Check if osTicket is already installed
+  stat:
+    path: "{{ osticket_install_path }}"
+  register: osticketinstalled
+
+- name: Creates osTicket folder
+  file:
     path: "{{ osticket_install_path }}"
     state: directory
-    # mode: '0755'
+    owner: "{{ osticket_web_owner }}"
+    group: "{{ osticket_web_group }}"
 
-- name: Download & Unarchive osTicket
-  ansible.builtin.unarchive:
+- name: Download and extract osTicket
+  unarchive:
     src: "{{ osticket_download_url }}"
+    remote_src: true
     dest: "{{ osticket_install_path }}"
+    owner: "{{ osticket_web_owner }}"
+    group: "{{ osticket_web_group }}"
+  notify: update permissions
+  when: not osticketinstalled.stat.exists or osticket_update
+    
+- name: Copy Template Config
+  ansible.builtin.copy:
     remote_src: yes
+    src: "{{ osticket_config_sample }}"
+    dest: "{{ osticket_config_file }}"
+    mode: 0644
+    owner: "{{ osticket_web_owner }}"
+    group: "{{ osticket_web_group }}"
+  when: not osticketinstalled.stat.exists

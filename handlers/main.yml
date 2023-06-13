@@ -1,2 +1,9 @@
 ---
-# handlers file for osticket
+- name: update permissions
+  file:
+    path: "{{ osticket_install_path }}"
+    state: directory
+    owner: "{{ osticket_web_owner }}"
+    group: "{{ osticket_web_group }}"
+    recurse: yes
+
