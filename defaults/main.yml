@@ -1,2 +1,4 @@
 ---
-# defaults file for osticket
+osticket_version: "v1.17.2"
+osticket_install_path: "/var/www/osticket"
+osticket_download_url: "https://github.com/osTicket/osTicket/releases/download/{{ osticket_version }}/osTicket-{{ osticket_version }}.zip"
