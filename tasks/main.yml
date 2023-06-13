@@ -1,2 +1,8 @@
 ---
+- name: Download & Unarchive osTicket
+  ansible.builtin.unarchive:
+    src: https://github.com/osTicket/osTicket/releases/download/v1.17.2/osTicket-v1.17.2.zip
+    dest: /var/www/osticket
+    remote_src: yes
+
 # tasks file for osticket
