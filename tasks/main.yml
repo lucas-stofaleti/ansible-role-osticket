@@ -1,9 +1,9 @@
 ---
 - name: Install Unzip
-  package: unzip
+  apt: unzip
   update_cache: yes
   state: present
-  
+
 - name: Create osTicket directory if it does not exist
   ansible.builtin.file:
     path: "{{ osticket_install_path }}"
