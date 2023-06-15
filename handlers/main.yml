@@ -6,4 +6,3 @@
     owner: "{{ osticket_web_owner }}"
     group: "{{ osticket_web_group }}"
     recurse: yes
-
