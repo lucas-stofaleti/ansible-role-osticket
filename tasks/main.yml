@@ -16,6 +16,7 @@
     state: directory
     owner: "{{ osticket_web_owner }}"
     group: "{{ osticket_web_group }}"
+  when: not osticketinstalled.stat.exists or osticket_update
 
 - name: Download and extract osTicket
   unarchive:
@@ -35,4 +36,4 @@
     mode: 0644
     owner: "{{ osticket_web_owner }}"
     group: "{{ osticket_web_group }}"
-  when: not osticketinstalled.stat.exists
+  when: not osticketinstalled.stat.exists and
