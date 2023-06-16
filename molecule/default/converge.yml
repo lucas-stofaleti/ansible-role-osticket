@@ -38,6 +38,12 @@
       - php8.0-bcmath
 
   pre_tasks:
+    - name: Install dirmngr to add repository
+      apt:
+        name: dirmngr
+        state: present
+        update_cache: yes
+        
     - name: Add PHP source
       ansible.builtin.apt_repository:
         repo: ppa:ondrej/php
