@@ -3,7 +3,9 @@
   hosts: all
   become: yes
   vars:
-    osticket_version: "v1.18"
+    osticket_plugins:
+      - auth-oauth2
+      - auth-2fa
     mysql_root_password: super-secure-password
     mysql_databases:
       - name: osticket
@@ -35,6 +37,7 @@
       - php-apcu
       - php-common
       - php-bcmath
+      - php-xml
 
   pre_tasks:
     - name: Install dirmngr to add repository

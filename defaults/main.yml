@@ -1,5 +1,5 @@
 ---
-osticket_version: "v1.17.2"
+osticket_version: "v1.18"
 osticket_install_path: "/var/www/osticket"
 osticket_download_url: "https://github.com/osTicket/osTicket/releases/download/{{ osticket_version }}/osTicket-{{ osticket_version }}.zip"
 osticket_web_owner: "www-data"
@@ -7,3 +7,5 @@ osticket_web_group: "www-data"
 osticket_update: false
 osticket_config_sample: "{{ osticket_install_path }}/upload/include/ost-sampleconfig.php"
 osticket_config_file: "{{ osticket_install_path }}/upload/include/ost-config.php"
+osticket_plugin_url: "https://s3.amazonaws.com/downloads.osticket.com/plugin"
+osticket_plugin_folder: "{{ osticket_install_path }}/upload/include/plugins"

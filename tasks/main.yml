@@ -37,3 +37,11 @@
     owner: "{{ osticket_web_owner }}"
     group: "{{ osticket_web_group }}"
   when: not osticketinstalled.stat.exists
+
+- name: Download Plugins
+  ansible.builtin.get_url:
+    url: "{{ osticket_plugin_url }}/{{ item }}.phar"
+    dest: "{{ osticket_plugin_folder }}/{{ item }}.phar"
+  with_items: "{{ osticket_plugins }}"
+  when: osticket_plugins is defined
+  notify: update permissions
