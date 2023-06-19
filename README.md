@@ -129,3 +129,7 @@ ansible-galaxy install lucas_stofaleti.osticket
 
 ## License
 MIT / BSD
+
+## Author Information
+
+This role was created in 2023 by [Lucas Stofaleti](https://www.linkedin.com/in/lucasstofaleti).
