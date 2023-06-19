@@ -1,5 +1,5 @@
 # Ansible osTicket
-CI
+[![CI](https://github.com/lucas-stofaleti/ansible-role-osticket/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/lucas-stofaleti/ansible-role-osticket/actions/workflows/ci.yml)
 
 An Ansible Role to install osTicket on Ubuntu servers. You must have Apache, PHP and MySQL on your server (see [example](#examples) below).
 

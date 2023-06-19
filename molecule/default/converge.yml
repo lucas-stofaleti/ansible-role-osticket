@@ -55,13 +55,13 @@
       include_role:
         name: geerlingguy.mysql
 
-    - name: Include Apache role
-      include_role:
-        name: geerlingguy.apache
-
     - name: Include PHP role
       include_role:
         name: geerlingguy.php
+
+    - name: Include Apache role
+      include_role:
+        name: geerlingguy.apache
 
     - name: Include osTicket role
       include_role:
