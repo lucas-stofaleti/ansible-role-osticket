@@ -61,43 +61,11 @@ osticket_update: false
 ---
 - hosts: all
   become: yes
-  vars:
-    osticket_version: "v1.18"
-    osticket_plugins:
-      - auth-oauth2
-      - auth-2fa
-    mysql_root_password: super-secure-password
-    mysql_databases:
-      - name: osticket
-    mysql_users:
-      - name: osticket
-        host: "%"
-        password: super-secure-password
-        priv: "osticket.*:ALL"
-    apache_remove_default_vhost: true
-    apache_vhosts:
-      - servername: "osticket.test"
-        documentroot: "/var/www/osticket/upload"
-        serveralias: "www.osticket.test"
-        extra_parameters: |
-          ErrorLog ${APACHE_LOG_DIR}/osticket-error.log
-          CustomLog ${APACHE_LOG_DIR}/osticket-access.log combined
-    php_packages:
-      - php8.1
-      - libapache2-mod-php8.1
-      - php8.1-mysql
-      - php8.1-cgi
-      - php8.1-fpm
-      - php8.1-cli
-      - php8.1-curl
-      - php8.1-gd
-      - php8.1-imap
-      - php8.1-mbstring
-      - php8.1-intl
-      - php8.1-apcu
-      - php8.1-common
-      - php8.1-bcmath
-      - php8.1-xml
+  vars_files:
+    - vars/apache.yml
+    - vars/mysql.yml
+    - vars/php.yml
+    - vars/osticket.yml
 
   pre_tasks:
     - name: Add PHP source
@@ -120,7 +88,63 @@ osticket_update: false
     - name: Include osTicket role
       include_role:
         name: lucas_stofaleti.osticket
-```       
+```
+       
+*Inside `vars/osticket.yml`*:
+```yml
+---
+osticket_version: "v1.18"
+osticket_plugins:
+  - auth-oauth2
+  - auth-2fa
+```
+
+*Inside `vars/mysql.yml`*:
+```yml
+---
+mysql_root_password: super-secure-password
+mysql_databases:
+  - name: osticket
+mysql_users:
+  - name: osticket
+    host: "%"
+    password: super-secure-password
+    priv: "osticket.*:ALL"
+```
+
+*Inside `vars/apache.yml`*:
+```yml
+---
+apache_remove_default_vhost: true
+apache_vhosts:
+  - servername: "osticket.test"
+    documentroot: "/var/www/osticket/upload"
+    serveralias: "www.osticket.test"
+    extra_parameters: |
+      ErrorLog ${APACHE_LOG_DIR}/osticket-error.log
+      CustomLog ${APACHE_LOG_DIR}/osticket-access.log combined
+```
+
+*Inside `vars/php.yml`*:
+```yml
+---
+php_packages:
+  - php8.1
+  - libapache2-mod-php8.1
+  - php8.1-mysql
+  - php8.1-cgi
+  - php8.1-fpm
+  - php8.1-cli
+  - php8.1-curl
+  - php8.1-gd
+  - php8.1-imap
+  - php8.1-mbstring
+  - php8.1-intl
+  - php8.1-apcu
+  - php8.1-common
+  - php8.1-bcmath
+  - php8.1-xml
+```
 
 ## Installation
 ```
